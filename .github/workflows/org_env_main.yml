@@ -7,20 +7,14 @@ jobs:
   deploy-to-prod:
     runs-on: ubuntu-latest
 
-    # Bind this job to your "New_ENV" environment
+    # Bind this job to the "production" environment
     environment:
-      name: New_ENV
-      url: https://example.com   # optional display URL
-
-    env:
-      ENV_NAME: New_ENV
+      name: production
+      url: https://example.com   # just a demo URL for display
 
     steps:
       - name: Print environment name
-        run: echo "Environment is: $ENV_NAME"
+        run: echo "Environment is: ${{ job.environment }}"
 
-      - name: Use PROD_API_KEY safely
-        run: |
-          echo "Prod API key is set and will not be printed in logs"
-          # Example of using the secret
-          curl -H "Authorization: Bearer ${{ secrets.PROD_API_KEY }}" https://example.com/api
+      - name: Use PROD_API_KEY
+        run: echo "Prod API key is: ${{ secrets.PROD_API_KEY }}"
