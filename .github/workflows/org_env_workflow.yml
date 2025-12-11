@@ -1,0 +1,29 @@
+name: Deploy to New_ENV
+
+on:
+  workflow_dispatch:  # allows manual run
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # Bind to the New_ENV environment
+    environment:
+      name: New_ENV
+      url: https://example.com
+
+    env:
+      ENV_NAME: New_ENV
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Print environment name
+        run: echo "Deploying to environment: $ENV_NAME"
+
+      - name: Use PROD_API_KEY safely
+        run: |
+          echo "Secret is set. You can use it here for deployments."
+          # Example: simulate API call
+          # curl -H "Authorization: Bearer ${{ secrets.PROD_API_KEY }}" https://example.com/api
