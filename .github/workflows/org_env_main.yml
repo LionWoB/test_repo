@@ -1,0 +1,26 @@
+name: Demo Environment Secret
+
+on:
+  workflow_dispatch:    # allows manual run from Actions tab
+
+jobs:
+  deploy-to-prod:
+    runs-on: ubuntu-latest
+
+    # Bind this job to your "New_ENV" environment
+    environment:
+      name: New_ENV
+      url: https://example.com   # optional display URL
+
+    env:
+      ENV_NAME: New_ENV
+
+    steps:
+      - name: Print environment name
+        run: echo "Environment is: $ENV_NAME"
+
+      - name: Use PROD_API_KEY safely
+        run: |
+          echo "Prod API key is set and will not be printed in logs"
+          # Example of using the secret
+          curl -H "Authorization: Bearer ${{ secrets.PROD_API_KEY }}" https://example.com/api
