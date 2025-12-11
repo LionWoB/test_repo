@@ -17,4 +17,4 @@ jobs:
         run: echo "Environment is: $ENV_NAME"
 
       - name: Use PROD_API_KEY
-        run: echo "Prod API key is: ${{ secrets.PROD_API_KEY }}"
+        run: echo "Prod API key is: ${{ secrets.New_ENV}}"
