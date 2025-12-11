@@ -1,0 +1,20 @@
+ame: Demo Environment Secret
+
+on:
+  workflow_dispatch:    # allows manual run from Actions tab
+
+jobs:
+  deploy-to-prod:
+    runs-on: ubuntu-latest
+
+    # Bind this job to the "New_ENV" environment
+    environment: New_ENV
+    env:
+      ENV_NAME: New_ENV
+
+    steps:
+      - name: Print environment name
+        run: echo "Environment is: $ENV_NAME"
+
+      - name: Use PROD_API_KEY
+        run: echo "Prod API key is: ${{ secrets.PROD_API_KEY }}"
